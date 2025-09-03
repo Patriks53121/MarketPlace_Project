@@ -1,13 +1,28 @@
 import List from "../API/list";
 import './catalog.css';
-import { useState } from 'react';
+import {useState, useRef, useEffect} from 'react';
 
 function Catalog() {
 
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedSeries, setSelectedSeries] = useState('');
-    const [selectedClutchType, setSelectedClutchType] = useState('');
+    const [selectedTransmissionType, setSelectedTransmissionType] = useState('');
+    const [selectedFuelTypes, setSelectedFuelTypes] = useState([]);
+    const [isFuelDropdownOpen, setIsFuelDropdownOpen] = useState(false);
+    const fuelDropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (fuelDropdownRef.current && !fuelDropdownRef.current.contains(event.target)) {
+                setIsFuelDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [fuelDropdownRef]);
 
     const squareStyle2 = {
         backgroundColor: '#007AE3',
@@ -55,7 +70,7 @@ function Catalog() {
         }
     };
 
-    const cluch = {
+    const transmission = {
         manual: ["5", "6"],
         automat: ["5", "6", "7", "8", "9"]
     };
@@ -63,7 +78,7 @@ function Catalog() {
     const volume = ["1.4", "1.6", "1.8", "1.9", "2.0", "2.2", "2.3", "2.4", "2.5", "2.8", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0"];
     const bodyType = ["Sedans", "Universals", "Apvidus", "Kupeja", "Kabriolets", "Hečbeks"];
     const color = ["Melna", "Balta", "Zila", "Zala", "Sarkana", "Dzeltena", "Bruna", "Peleka", "Violeta", "Sudraba", "Custom"];
-
+    const fuelType = ["Benzīns", "Dīzelis", "Gaze", "Elektrība"];
     const carBrands = Object.keys(carData);
 
     const handleBrandChange = (e) => {
@@ -75,6 +90,14 @@ function Catalog() {
     const handleModelChange = (e) => {
         setSelectedModel(e.target.value);
         setSelectedSeries('');
+    };
+
+    const handleFuelTypeChange = (e) => {
+        const checked = e.target.checked;
+        const value = e.target.value;
+        setSelectedFuelTypes(prev =>
+            checked ? [...prev, value] : prev.filter(item => item !== value)
+        );
     };
 
     return (
@@ -130,7 +153,7 @@ function Catalog() {
                 <input type="number" className="input" placeholder="Lidz" style={{width: '140px'}}></input>
             </div>
             <div className="bottom">
-                <label style={{paddingLeft: '15px', paddingRight: "10px"}}>Gads:</label>
+                <label style={{paddingLeft: '10px', paddingRight: "10px"}}>Gads:</label>
                 <select className="input" style={{paddingRight: "30px"}}>
                     <option value=""></option>
                     {years.map(year => <option key={year} value={year}>{year}</option>)}
@@ -143,9 +166,9 @@ function Catalog() {
                 <label style={{paddingLeft: '15px', paddingRight: "10px"}}>Atrumkarba:</label>
                 <select
                     className="input"
-                    style={{paddingRight: "30px"}}
-                    value={selectedClutchType}
-                    onChange={(e) => setSelectedClutchType(e.target.value)}
+                    style={{paddingRight: "5px"}}
+                    value={selectedTransmissionType}
+                    onChange={(e) => setSelectedTransmissionType(e.target.value)}
                 >
                     <option value="">Izvēlieties tipu</option>
                     <option value="manual">Manuālā</option>
@@ -155,10 +178,10 @@ function Catalog() {
                 <select
                     className="input"
                     style={{paddingRight: "30px"}}
-                    disabled={!selectedClutchType}
+                    disabled={!selectedTransmissionType}
                 >
                     <option value=""></option>
-                    {selectedClutchType && cluch[selectedClutchType].map(gear => (
+                    {selectedTransmissionType && transmission[selectedTransmissionType].map(gear => (
                         <option key={gear} value={gear}>{gear}</option>
                     ))}
                 </select>
@@ -172,6 +195,32 @@ function Catalog() {
                     <option value=""></option>
                     {volume.map(vol => <option key={vol} value={vol}>{vol}</option>)}
                 </select>
+                <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Degviela: </label>
+                <div className="custom-select-container" ref={fuelDropdownRef}>
+                    <button
+                        type="button"
+                        className="custom-select-button"
+                        onClick={() => setIsFuelDropdownOpen(prev => !prev)}
+                    >
+                        {selectedFuelTypes.length > 0 ? selectedFuelTypes.join(', ') : ''}
+                    </button>
+                    {isFuelDropdownOpen && (
+                        <div className="custom-select-options">
+                            {fuelType.map(type => (
+                                <label key={type}>
+                                    <input
+                                        type="checkbox"
+                                        value={type}
+                                        checked={selectedFuelTypes.includes(type)}
+                                        onChange={handleFuelTypeChange}
+                                    />
+                                    {type}
+                                </label>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
                 <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Virsbuve: </label>
                 <select className="input" style={{paddingRight: "30px"}}>
                     <option value=""></option>
@@ -182,6 +231,7 @@ function Catalog() {
                     <option value=""></option>
                     {color.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
+
             </div>
             <List />
         </div>
