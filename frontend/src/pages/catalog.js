@@ -7,6 +7,7 @@ function Catalog() {
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedSeries, setSelectedSeries] = useState('');
+    const [selectedClutchType, setSelectedClutchType] = useState('');
 
     const squareStyle2 = {
         backgroundColor: '#007AE3',
@@ -16,7 +17,7 @@ function Catalog() {
         marginRight: 'auto',
         width: '98%',
         borderRadius: '30px',
-        minHeight: '200px'
+        minHeight: '120px'
     };
 
     const currentYear = new Date().getFullYear();
@@ -54,10 +55,14 @@ function Catalog() {
         }
     };
 
-    const volume = ["0.5", "0.6", "0.8", "1", "1.2", "1.4", "1.6", "1.8", "1.9", "2.0", "2.2", "2.3", "2.4", "2.5", "2.8", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0"];
+    const cluch = {
+        manual: ["5", "6"],
+        automat: ["5", "6", "7", "8", "9"]
+    };
+
+    const volume = ["1.4", "1.6", "1.8", "1.9", "2.0", "2.2", "2.3", "2.4", "2.5", "2.8", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0"];
     const bodyType = ["Sedans", "Universals", "Apvidus", "Kupeja", "Kabriolets", "Hečbeks"];
     const color = ["Melna", "Balta", "Zila", "Zala", "Sarkana", "Dzeltena", "Bruna", "Peleka", "Violeta", "Sudraba", "Custom"];
-
 
     const carBrands = Object.keys(carData);
 
@@ -75,7 +80,7 @@ function Catalog() {
     return (
         <div style={squareStyle2} className="square2">
             <br/>
-            <div>
+            <div className="top">
                 <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Cena: </label>
                 <input type="number" placeholder="No" className="input"/>
                 <span style={{fontSize: "1.5rem"}}>-</span>
@@ -88,7 +93,7 @@ function Catalog() {
                     value={selectedBrand}
                     onChange={handleBrandChange}
                 >
-                    <option value="">Select Brand</option>
+                    <option value=""></option>
                     {carBrands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
                 </select>
                 <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Modelis: </label>
@@ -99,7 +104,7 @@ function Catalog() {
                     value={selectedModel}
                     onChange={handleModelChange}
                 >
-                    <option value="">Select Model</option>
+                    <option value=""></option>
                     {selectedBrand && carData[selectedBrand].models.map(model => (
                         <option key={model} value={model}>{model}</option>
                     ))}
@@ -112,16 +117,19 @@ function Catalog() {
                     value={selectedSeries}
                     onChange={(e) => setSelectedSeries(e.target.value)}
                 >
-                    <option value="">Select Series</option>
+                    <option value=""></option>
                     {selectedBrand && selectedModel && carData[selectedBrand].series[selectedModel] &&
                         carData[selectedBrand].series[selectedModel].map(series => (
                             <option key={series} value={series}>{series}</option>
                         ))
                     }
                 </select>
-
+                <label style={{ paddingLeft: '15px', paddingRight: "10px" }} >Nobraukums:</label>
+                <input type="number" className="input" placeholder="No" style={{width: '120px'}}></input>
+                <span style={{fontSize: "1.5rem"}}>-</span>
+                <input type="number" className="input" placeholder="Lidz" style={{width: '140px'}}></input>
             </div>
-            <div>
+            <div className="bottom">
                 <label style={{paddingLeft: '15px', paddingRight: "10px"}}>Gads:</label>
                 <select className="input" style={{paddingRight: "30px"}}>
                     <option value=""></option>
@@ -133,10 +141,26 @@ function Catalog() {
                     {years.map(year => <option key={year} value={year}>{year}</option>)}
                 </select>
                 <label style={{paddingLeft: '15px', paddingRight: "10px"}}>Atrumkarba:</label>
-                <select className="input" style={{paddingRight: "30px"}}>
+                <select
+                    className="input"
+                    style={{paddingRight: "30px"}}
+                    value={selectedClutchType}
+                    onChange={(e) => setSelectedClutchType(e.target.value)}
+                >
+                    <option value="">Izvēlieties tipu</option>
+                    <option value="manual">Manuālā</option>
+                    <option value="automat">Automātiskā</option>
+                </select>
+                <label style={{paddingLeft: '15px', paddingRight: "10px"}}>Atrumi:</label>
+                <select
+                    className="input"
+                    style={{paddingRight: "30px"}}
+                    disabled={!selectedClutchType}
+                >
                     <option value=""></option>
-                    <option value="Manuala">Manuala</option>
-                    <option value="Automats">Automats</option>
+                    {selectedClutchType && cluch[selectedClutchType].map(gear => (
+                        <option key={gear} value={gear}>{gear}</option>
+                    ))}
                 </select>
                 <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Tilpums: </label>
                 <select className="input" style={{paddingRight: "30px"}}>

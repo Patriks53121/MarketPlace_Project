@@ -3,8 +3,17 @@
     background: #0088FF;
     border-radius: 10px;
 }
+
 .input::placeholder{
-    padding-left: 10px;
+    padding-left: 40%;
     color: #fff;
     opacity: 1;
+}
+
+.top {
+    padding-left: 40px;
+}
+.bottom {
+    padding-left: 60px;
+
 }
