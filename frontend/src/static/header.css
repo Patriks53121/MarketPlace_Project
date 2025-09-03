@@ -1,0 +1,99 @@
+@font-face {
+    font-family: 'StreetDrips';
+    src: url('../fonts/StreetDrips.otf') format('opentype');
+}
+
+.purple-bg {
+    background-color: #7BC7D4 !important;
+    position: relative;
+    z-index: 1030;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.white-br {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    cursor: pointer;
+}
+
+.link-text {
+    color: #fff !important;
+    font-size: 1.3rem !important;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Cascadia Code', sans-serif;
+    transition: font-size 0.3s;
+}
+.link-text:hover {
+    color: black !important;
+    font-size: 1.5rem !important;
+    transition: background 0.2s, color 0.3s, font-size 0.3s;
+}
+.link-text::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: black;
+    transition: width 0.3s;
+}
+.link-text:hover::after {
+    width: 100%;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.lang-btn{
+
+    background: none;
+    border: none;
+    color: #fff !important;
+    font-size: 0.9rem !important;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, font-size 0.3s;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.lang-btn::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: black;
+    transition: width 0.3s;
+}
+
+.lang-btn:hover {
+    color: black !important;
+    font-size: 1.2rem !important;
+    transition: background 0.2s, color 0.3s, font-size 0.3s;
+}
+.lang-btn:hover::after {
+    width: 100%;
+}
+
+.title {
+    font-family: "StreetDrips", serif;
+    font-size: 2.65rem !important;
+    color: #7090FF !important;
+    margin-left: 115px;
+}
+
+.logIn-btn {
+    background: none;
+    border: none;
+    color: #fff !important;
+    font-size: 1rem !important;
+    cursor: pointer;
+}
+.logIn-btn:hover {
+    font-size: 1.2rem !important;
+    transition: font-size 0.3s;
+}
