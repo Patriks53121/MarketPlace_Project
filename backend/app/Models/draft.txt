@@ -1,0 +1,41 @@
+ public function getId(): int{return $this->id;}
+    public function setId(int $id): void{$this->id = $id;}
+
+    public function getBrand(): string{return $this->brand;}
+    public function setBrand(string $brand): void{$this->brand = $brand;}
+
+    public function getModel(): string{return $this->model;}
+    public function setModel(string $model): void{$this->model = $model;}
+
+    public function getSeries(): string{return $this->series;}
+    public function setSeries(string $series): void{$this->series = $series;}
+
+    public function getTransmission(): string{return $this->transmission;}
+    public function setTransmission(string $transmission): void{$this->transmission = $transmission;}
+
+    public function getClutch(): int{return $this->clutch;}
+    public function setClutch(int $clutch): void{$this->clutch = $clutch;}
+
+    public function getPrice(): int{return $this->price;}
+    public function setPrice(int $price): void{$this->price = $price;}
+
+    public function getYear(): DateTime{return $this->year;}
+    public function setYear(DateTime $year): void{$this->year = $year;}
+
+    public function getVolume(): int{return $this->volume;}
+    public function setVolume(int $volume): void{$this->volume = $volume;}
+
+    public function getBodyType(): string{return $this->bodyType;}
+    public function setBodyType(string $bodyType): void{$this->bodyType = $bodyType;}
+
+    public function getColor(): string{return $this->color;}
+    public function setColor(string $color): void{$this->color = $color;}
+
+    public function getMillage(): string{return $this->Millage;}
+    public function setMillage(string $Millage): void{$this->Millage = $Millage;}
+
+    public function getFuel(): string{return $this->fuel;}
+    public function setFuel(string $fuel): void{$this->fuel = $fuel;}
+
+    public function getUserID(): Uuid{return $this->userID;}
+    public function setUserID(Uuid $userID): void{$this->userID = $userID;}

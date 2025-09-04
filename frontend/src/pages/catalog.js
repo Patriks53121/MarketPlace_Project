@@ -44,8 +44,8 @@ function Catalog() {
 
     const carData = {
         "bmw": {
-            models: ["1.serija", "2.serija", "3.serija", "4.serija", "5.serija", "6.serija", "7.serija", "8.serija", "M serija", "X serija", "Z serija", "i serija"],
-            series: {
+            series: ["1.serija", "2.serija", "3.serija", "4.serija", "5.serija", "6.serija", "7.serija", "8.serija", "M serija", "X serija", "Z serija", "i serija"],
+            models: {
                 "1.serija": ["116", "118", "120", "130", "135", "140"],
                 "2.serija": ["214", "216", "218", "220", "225", "228"],
                 "3.serija": ["316", "318", "320", "323", "324", "325", "328", "330", "335", "340"],
@@ -61,12 +61,12 @@ function Catalog() {
             }
         },
         "audi": {
-            models: ["A3", "A4", "A5", "A6"],
-            series: {}
+            series: ["A3", "A4", "A5", "A6"],
+            models: {}
         },
         "mercedes": {
-            models: ["A klase", "B klase"],
-            series: {}
+            series: ["A klase", "B klase"],
+            models: {}
         }
     };
 
@@ -86,11 +86,15 @@ function Catalog() {
         setSelectedModel('');
         setSelectedSeries('');
     };
+    const handleSeriesChange = (e) => {
+        setSelectedSeries(e.target.value);
+        setSelectedModel('');
+    };
 
     const handleModelChange = (e) => {
         setSelectedModel(e.target.value);
-        setSelectedSeries('');
     };
+
 
     const handleFuelTypeChange = (e) => {
         const checked = e.target.checked;
@@ -102,7 +106,6 @@ function Catalog() {
 
     return (
         <div style={squareStyle2} className="square2">
-            <br/>
             <div className="top">
                 <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Cena: </label>
                 <input type="number" placeholder="No" className="input"/>
@@ -119,31 +122,31 @@ function Catalog() {
                     <option value=""></option>
                     {carBrands.map(brand => <option key={brand} value={brand}>{brand}</option>)}
                 </select>
-                <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Modelis: </label>
+                <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Serija: </label>
                 <select
                     className="input"
                     style={{paddingRight: "70px"}}
                     disabled={!selectedBrand}
+                    value={selectedSeries}
+                    onChange={handleSeriesChange}
+                >
+                    <option value=""></option>
+                    {selectedBrand && carData[selectedBrand].series.map(series => (
+                        <option key={series} value={series}>{series}</option>
+                    ))}
+                </select>
+                <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Modelis: </label>
+                <select
+                    className="input"
+                    style={{paddingRight: "30px"}}
+                    disabled={!selectedSeries}
                     value={selectedModel}
                     onChange={handleModelChange}
                 >
                     <option value=""></option>
-                    {selectedBrand && carData[selectedBrand].models.map(model => (
-                        <option key={model} value={model}>{model}</option>
-                    ))}
-                </select>
-                <label style={{ paddingLeft: '15px', paddingRight: "10px" }}>Serija: </label>
-                <select
-                    className="input"
-                    style={{paddingRight: "30px"}}
-                    disabled={!selectedModel}
-                    value={selectedSeries}
-                    onChange={(e) => setSelectedSeries(e.target.value)}
-                >
-                    <option value=""></option>
-                    {selectedBrand && selectedModel && carData[selectedBrand].series[selectedModel] &&
-                        carData[selectedBrand].series[selectedModel].map(series => (
-                            <option key={series} value={series}>{series}</option>
+                    {selectedBrand && selectedSeries && carData[selectedBrand].models[selectedSeries] &&
+                        carData[selectedBrand].models[selectedSeries].map(model => (
+                            <option key={model} value={model}>{model}</option>
                         ))
                     }
                 </select>
@@ -170,7 +173,7 @@ function Catalog() {
                     value={selectedTransmissionType}
                     onChange={(e) => setSelectedTransmissionType(e.target.value)}
                 >
-                    <option value="">Izvēlieties tipu</option>
+                    <option value=""></option>
                     <option value="manual">Manuālā</option>
                     <option value="automat">Automātiskā</option>
                 </select>
