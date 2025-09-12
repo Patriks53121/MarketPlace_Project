@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('mileage');
             $table->string('fuel');
             $table->string('description')->nullable();
+            $table->string('images')->nullable();
             $table->uuid('userID');
             $table->timestamps();
         });

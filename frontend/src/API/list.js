@@ -1,9 +1,22 @@
+import axios from 'axios';
 
 
-function list() {
+const apiClient = axios.create({
+    baseURL: 'http://localhost:8000/api',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+});
 
-    return
-
+async function List() {
+    try {
+        const response = await apiClient.get('/list');
+        return response.data;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
 }
 
-export default list;
+export default List;
