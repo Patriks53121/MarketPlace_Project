@@ -25,13 +25,13 @@ class CarFactory extends Factory
             'clutch' => fake()->numberBetween(1, 8),
             'price' => fake()->numberBetween(1000, 100000),
             'description' => fake()->realText(),
-            'year' => fake()->dateTimeBetween('-30 years', 'now'),
+            'year' => "2015.01",
             'mileage' => 100000,
             'volume' => '3.0',
             'fuel' => 'Dizelis',
             'bodyType' => 'Sedan',
             'color' => fake()->colorName(),
-            'userID' => '1',
+            'userID' => fake()->numberBetween(1, 10),
         ];
     }
 }

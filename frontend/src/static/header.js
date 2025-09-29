@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './header.css';
+import Login from '../pages/loginRegister/login';
 
 function Header() {
     return (
@@ -33,10 +34,11 @@ function Header() {
                             <Nav.Link href="/Sell" className="link-text" >Mani Sludinajumi</Nav.Link>
                         </Nav>
                         <Navbar.Text className="title">Auto Marketplace</Navbar.Text>
-                        <div className="m-auto">
-                            <button className="logIn-btn">LogIn</button>
-                        </div>
-
+                        <Navbar.Brand href="/login" className="white-br" >
+                            <div style={{marginLeft: '100px'}}>
+                                <button className="logIn-btn">LogIn</button>
+                            </div>
+                        </Navbar.Brand>
 
                     </Navbar.Collapse>
                 </Container>

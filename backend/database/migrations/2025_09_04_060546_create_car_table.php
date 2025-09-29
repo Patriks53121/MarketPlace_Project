@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('transmission');
             $table->integer('clutch');
             $table->integer('price');
-            $table->dateTime('year');
+            $table->string('year');
             $table->integer('volume');
             $table->string('bodyType');
             $table->string('color');
@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('fuel');
             $table->string('description')->nullable();
             $table->string('images')->nullable();
-            $table->uuid('userID');
+            $table->unsignedBigInteger('userID');
+            $table->foreign('userID')->references('id')->on('users');
             $table->timestamps();
         });
     }

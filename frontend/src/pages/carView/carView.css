@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'PirageRegular';
+    src: url('../../fonts/PirageRegular.otf') format('opentype');
+}
+.card1 {
+    display: flex;
+    flexWrap: wrap;
+}
+
+.car-img-card {
+    background-color: #010d21;
+    min-width: 500px;
+    min-height: 300px;
+}
+
+
+.info-right {
+    font-family: "PirageRegular", serif ;
+    padding-left: 30px;
+
+}
+
+
+.car-img-gallery {
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    gap: 20px;
+
+    background-color: #010d21;
+    width: 500px;
+    height: 300px;
+    padding: 10px 0;
+    scrollbar-width: none;
+
+}
+
+.car-img {
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    align-self: center;
+    min-width: 450px;
+    height: 300px;
+    object-fit: unset;
+}

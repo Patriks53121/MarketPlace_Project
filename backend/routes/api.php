@@ -10,3 +10,11 @@ Route::get('/list', function () {
         'status' => 'success'
     ]);
 });
+Route::get('/list/{id}', function ($id) {
+
+    return response()->json([
+        'message' => Car::find($id),
+        'status' => 'success'
+    ]);
+
+});

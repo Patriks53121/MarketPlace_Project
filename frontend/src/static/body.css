@@ -1,14 +1,45 @@
-.square, .square2 {
-    /* Edit width for both squares here: */
-    width: 1500px; /* <-- Change this value to adjust width */
-    min-width: 1100px;
-    max-width: 1200px;
-    height: 15000px;
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body {
+
+body, html {
     background: #90B2D1 !important;
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.square {
+    width: 1450px;
+    max-width: 1450px;
+    height: auto;
+    min-height: calc(100vh - 175px);
+    position: relative;
+    top: 40px;
+    left: 50%;
+    margin-left: -725px;
+    background-color: #0088FF;
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: 70px;
+    padding-bottom: 20px;
+}
+
+.square2 {
+    width: 1450px;
+    height: auto;
+    min-height: calc(100vh - 135px);
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    margin-left: -725px;
+    background-color: #0088FF;
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-bottom: 70px;
+    padding-bottom: 20px;
+    overflow-x: hidden;
 }

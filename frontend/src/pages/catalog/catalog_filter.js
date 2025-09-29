@@ -27,7 +27,7 @@ function CatalogFilter() {
         backgroundColor: '#007AE3',
         position: 'absolute',
         top: '30px',
-        left: '50%',
+        left: '100%',
         width: '1400px',
         minHeight: '120px',
         borderRadius: '30px',

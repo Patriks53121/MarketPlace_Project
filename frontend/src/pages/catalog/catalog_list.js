@@ -1,12 +1,14 @@
 import './catalog.css';
-import List from '../API/list';
+import List from '../../API/list';
 import {useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 function CatalogList(){
 
     const fallbackImg = '/images/img.png';
     const [carList, setCarList] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const axiosData = async () => {
@@ -33,7 +35,7 @@ function CatalogList(){
                         className="car-card car-card-clickable"
                         tabIndex={0}
                         role="button"
-                        onClick={() => alert(`Clicked on ${car.brand} ${car.series} ${car.model}`)}
+                        onClick={() => navigate(`/catalog/${car.brand}/${car.series}/${car.model}/${car.id}`)}
                         onKeyPress={e => {
                             if (e.key === 'Enter' || e.key === ' ') {
                                 alert(`Clicked on ${car.brand} ${car.series} ${car.model}`);
@@ -52,7 +54,7 @@ function CatalogList(){
                             <p><strong>Gads:</strong> <span>{car.year}</span></p>
                             <p><strong>Cena:</strong> <span>{car.price}</span> $</p>
                             <p><strong>Tilpums:</strong> <span>{car.volume}</span> L</p>
-                            <p><strong>Nobraukums:</strong> <span>{car.Millage}</span> km</p>
+                            <p><strong>Nobraukums:</strong> <span>{car.mileage}</span> km</p>
                         </div>
                     </div>
                 ))}

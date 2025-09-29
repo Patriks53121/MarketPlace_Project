@@ -22,7 +22,7 @@
     cursor: pointer;
     font-weight: bold;
     font-family: 'Cascadia Code', sans-serif;
-    transition: font-size 0.3s;
+    transition: font-size 0.3s, color 0.3s !important;
 }
 .link-text:hover {
     color: black !important;
@@ -93,6 +93,7 @@
     color: #fff !important;
     font-size: 1rem !important;
     cursor: pointer;
+    transition: font-size 0.3s !important;
 }
 .logIn-btn:hover {
     font-size: 1.2rem !important;
